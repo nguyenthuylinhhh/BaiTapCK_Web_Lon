@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐĂNG NHẬP</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="../CSS/dangNhap.css">
+    <script src="../JS/jquery-3.6.0.min.js"></script>
+    <script src="../JS/bootstrap.min.js"></script>
+    <script src="../JS/dangKy.js"></script>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="form-container signincontainer">
+            <form action="#">
+                <h1>Đăng nhập</h1>
+                <div class="socialcontainer">
+                    <a href="#"><img src="../IKON/facebookdark.png" alt="fb" width="100%"></a>
+                    <a href="#"><img src="../IKON/twitter.png" alt="twitter" width="100%"></i>
+                    </a>
+                    <a href="#"><img src="../IKON/intagram.png" alt="insta" width="100%"></a>
+                </div>
+                <span>Đăng nhập bằng tài khoản của bạn</span>
+                <input type="text" placeholder="Tên tài khoản" id="txtTK" /> <span style="color: red;" id="errorTK"></span>
+                <input type="password" placeholder="Mật khẩu" id="txtPass" /> <span style="color: red;" id="errorPass"></span>
+                <a href="#">Quên mật khẩu?</a>
+                <button onclick="dangNhap()" class="button" type="button">Đăng nhập</button>
+                <div class="row">
+                    <a href="../HTML/home.html">Về trang chủ</a>
+                </div>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h3>Chào mừng bạn đến với <span style="font-size: 30px;">AG</span> Sneaker</h3>
+                    <p>Nếu bạn chưa có tài khoản, hãy nhấn vào đăng ký để có thể mua sắm</p>
+                    <button class="ghost button " id="signUp" onclick="dangKy()">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateLoginForm() {
+            let isValid = true;
+
+            // Kiểm tra tên tài khoản
+            let username = document.getElementById("txtTK").value;
+            if (username === "") {
+                document.getElementById("errorTK").innerText = "Tên tài khoản không được để trống";
+                isValid = false;
+            } else {
+                document.getElementById("errorTK").innerText = "";
+            }
+
+            // Kiểm tra mật khẩu
+            let password = document.getElementById("txtPass").value;
+            if (password === "") {
+                document.getElementById("errorPass").innerText = "Mật khẩu không được để trống";
+                isValid = false;
+            } else {
+                document.getElementById("errorPass").innerText = "";
+            }
+
+            return isValid;
+        }
+
+        function dangNhap() {
+            if (validateLoginForm()) {
+                alert("Đăng nhập thành công!");
+                // Chuyển hướng sang trang chủ hoặc trang người dùng ở đây nếu cần
+            }
+        }
+
+        function redirectToRegister() {
+            window.location.href = "../HTML/dangKy.html";
+        }
+    </script>
+</body>
+
+</html>

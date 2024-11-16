@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐĂNG KÝ</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="../CSS/dangNhap.css">
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form action="">
+                <h1>Đăng ký</h1>
+                <input type="text" placeholder="Họ tên" id="txtHoten" /> <span style="color: red;" id="errorNameDK"></span>
+                <input type="text" placeholder="Tên tài khoản" id="txtTKDK" /> <span style="color: red;" id="errorTKDK"></span>
+                <input type="password" placeholder="Mật khẩu" id="txtMKDK" /> <span style="color: red;" id="errorPassDK"></span>
+                <input type="password" placeholder="Nhập lại mật khẩu" id="txtRepassDK" /> <span style="color: red;" id="errorRePassDK"></span>
+                <input type="tel" placeholder="Số điện thoại" id="phone" /> <span style="color: red;" id="errorSDTDK"></span>
+                <input type="button" value="tạo tài khoản" class="button" onclick="taoTaiKhoan()" data-toggle="modal" data-target="#myModal">
+            </form>
+            <div id="createModal"></div>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1 style="color: black; font-family: 'Times New Roman', Times, serif; font-size: 70px;">AG</h1>
+                    <h5>Nhiều ưu đãi hot đang chờ bạn</h5>
+                    <h5>Đăng ký ngay hôm nay</h5>
+                    <a href="../HTML/dangNhap.html">Quay lại trang đăng nhập</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal thông báo tạo tài khoản thành công -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Tạo tài khoản thành công</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tài khoản của bạn đã được tạo thành công!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JS/jquery-3.6.0.min.js"></script>
+    <script src="../JS/bootstrap.min.js"></script>
+    <script src="../JS/dangKy.js"></script>
+
+    <script>
+        // Hàm kiểm tra form
+        function validateForm() {
+            let isValid = true;
+
+            // Kiểm tra tên
+            let name = document.getElementById("txtHoten").value;
+            if (name == "") {
+                document.getElementById("errorNameDK").innerText = "Họ tên không được để trống";
+                isValid = false;
+            } else {
+                document.getElementById("errorNameDK").innerText = "";
+            }
+
+            // Kiểm tra tên tài khoản
+            let username = document.getElementById("txtTKDK").value;
+            if (username == "") {
+                document.getElementById("errorTKDK").innerText = "Tên tài khoản không được để trống";
+                isValid = false;
+            } else {
+                document.getElementById("errorTKDK").innerText = "";
+            }
+
+            // Kiểm tra mật khẩu
+            let password = document.getElementById("txtMKDK").value;
+            if (password == "") {
+                document.getElementById("errorPassDK").innerText = "Mật khẩu không được để trống";
+                isValid = false;
+            } else {
+                document.getElementById("errorPassDK").innerText = "";
+            }
+
+            // Kiểm tra nhập lại mật khẩu
+            let repass = document.getElementById("txtRepassDK").value;
+            if (repass !== password) {
+                document.getElementById("errorRePassDK").innerText = "Mật khẩu không khớp";
+                isValid = false;
+            } else {
+                document.getElementById("errorRePassDK").innerText = "";
+            }
+
+            // Kiểm tra số điện thoại
+            let phone = document.getElementById("phone").value;
+            if (phone == "") {
+                document.getElementById("errorSDTDK").innerText = "Số điện thoại không được để trống";
+                isValid = false;
+            } else {
+                document.getElementById("errorSDTDK").innerText = "";
+            }
+
+            return isValid;
+        }
+
+        function taoTaiKhoan() {
+            // Lấy giá trị từ các input
+            const hoTen = document.getElementById("txtHoten").value;
+            const tenTaiKhoan = document.getElementById("txtTKDK").value;
+            const matKhau = document.getElementById("txtMKDK").value;
+            const nhapLaiMK = document.getElementById("txtRepassDK").value;
+            const soDienThoai = document.getElementById("phone").value;
+
+            // Kiểm tra các giá trị đầu vào (ví dụ: kiểm tra xem có trống không)
+            if (hoTen && tenTaiKhoan && matKhau && nhapLaiMK && soDienThoai) {
+                if (matKhau === nhapLaiMK) {
+                    // Hiển thị modal thành công
+                    $('#myModal').modal('show');
+                } else {
+                    document.getElementById("errorRePassDK").textContent = "Mật khẩu không khớp.";
+                }
+            } else {
+                // Hiển thị lỗi cho từng trường nếu thiếu
+                if (!hoTen) document.getElementById("errorNameDK").textContent = "Vui lòng nhập họ tên.";
+                if (!tenTaiKhoan) document.getElementById("errorTKDK").textContent = "Vui lòng nhập tên tài khoản.";
+                if (!matKhau) document.getElementById("errorPassDK").textContent = "Vui lòng nhập mật khẩu.";
+                if (!nhapLaiMK) document.getElementById("errorRePassDK").textContent = "Vui lòng nhập lại mật khẩu.";
+                if (!soDienThoai) document.getElementById("errorSDTDK").textContent = "Vui lòng nhập số điện thoại.";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
